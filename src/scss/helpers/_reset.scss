@@ -1,0 +1,19 @@
+/* @font-face {
+  font: {
+    family: 'camingocodebold';
+    style: normal;
+    weight: normal;
+  }
+  src: url(./fonts/camingocode-bold-webfont.eot);
+  src: url(./fonts/camingocode-bold-webfont.eot?#iefix) format('embedded-opentype'),
+    url(./fonts/camingocode-bold-webfont.woff) format('woff'),
+    url(./fonts/camingocode-bold-webfont.ttf) format('truetype'),
+    url(./fonts/camingocode-bold-webfont.svg#camingocodebold) format('svg');
+} */
+
+html{
+  box-sizing: border-box;
+  background: #eee;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+}
