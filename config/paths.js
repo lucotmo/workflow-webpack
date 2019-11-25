@@ -1,6 +1,10 @@
 const path = require('path')
 
 module.exports = {
-  src: path.resolve(__dirname, '../src'),
-  build: path.resolve(__dirname, '../dist'),
+  srcDir: path.resolve(__dirname, '../', 'src'),
+  publicDir: path.resolve(__dirname, '../', 'public'),
+  imagesFolder: 'images',
+  fontsFolder: 'fonts',
+  cssFolder: 'css',
+  jsFolder: 'js',
 }

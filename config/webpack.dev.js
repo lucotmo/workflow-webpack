@@ -1,17 +1,14 @@
-const paths = require('./paths')
-const webpack = require('webpack')
-const merge = require('webpack-merge')
-const common = require('./webpack.common.js')
+const paths = require('./paths'),
+  webpack = require('webpack'),
+  merge = require('webpack-merge'),
+  common = require('./webpack.common.js')
 
 module.exports = merge(common, {
-
   mode: 'development',
-
   devtool: 'inline-source-map',
-
   devServer: {
     historyApiFallback: true,
-    contentBase: paths.build,
+    contentBase: paths.publicDir,
     open: true,
     compress: true,
     hot: true,

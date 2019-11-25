@@ -1,17 +1,16 @@
-const paths = require('./paths')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const paths = require('./paths'),
+  { CleanWebpackPlugin } = require('clean-webpack-plugin'),
+  CopyWebpackPlugin = require('copy-webpack-plugin'),
+  HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-  context: paths.src,
+  context: paths.srcDir,
   entry: {
     app: './index.js'
   } ,
   output: {
-    path: paths.build,
+    path: paths.publicDir,
     filename: '[name].js',
-    publicPath: '/',
   },
   module: {
     rules: [
@@ -31,13 +30,16 @@ module.exports = {
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|webp|svg)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[path][name].[ext]',
-          context: 'src',
-        },
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+              context: 'src',
+            },
+          }
+        ]
       },
-
       {
         test: /\.(ttf|eot|woff2?|mp4|txt|xml)$/,
         loader: 'url-loader',
@@ -46,21 +48,21 @@ module.exports = {
           name: '[path][name].[ext]',
           context: 'src',
         },
-      },
+      }
     ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {
-        from: paths.src + '/fonts',
+        from: `${paths.srcDir}/${paths.fontsFolder}`,
         to: 'fonts',
       },
     ]),
     new HtmlWebpackPlugin({
       title: 'Workflow Webpack',
-      favicon: paths.src + '/img/favicon.ico',
-      template: paths.src + '/template.html',
+      favicon: `${paths.srcDir}/${paths.imagesFolder}/favicon.ico`,
+      template: paths.srcDir + '/template.html',
       filename: 'index.html',
       hash: true,
       minify: {

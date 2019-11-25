@@ -1,22 +1,21 @@
-const paths = require('./paths')
-const merge = require('webpack-merge')
-const common = require('./webpack.common.js')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const TerserJSPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const paths = require('./paths'),
+  merge = require('webpack-merge'),
+  common = require('./webpack.common.js'),
+  MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = merge(common, {
   mode: 'production',
   devtool: false,
   output: {
-    path: paths.build,
-    publicPath: '/',
-    filename: '[name].js',
+    path: paths.publicDir,
+    publicPath: './',
+    filename: `[name].js`,
+    chunkFilename: `[name].js`,
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/app.css',
+      filename: `[name].css`,
+      chunkFilename: `[name].css`,
     }),
   ],
   module: {
@@ -35,25 +34,40 @@ module.exports = merge(common, {
           'sass-loader',
         ],
       },
-    ],
-  },
-
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-    runtimeChunk: 'single',
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          test: /[\\/]node_modules[\\/](react|react-dom|lodash)[\\/]/,
-          name: 'vendors',
-          chunks: 'all',
-        },
+      {
+        test: /\.(?:ico|gif|png|jpg|jpeg|webp|svg)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]',
+              context: 'src',
+            },
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 65
+              },
+              optipng: {
+                enabled: false,
+              },
+              pngquant: {
+                quality: [0.65, 0.90],
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false,
+              },
+              webp: {
+                quality: 75
+              }
+            }
+          }
+        ]
       },
-    },
-  },
-  performance: {
-    hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
+    ],
   },
 })

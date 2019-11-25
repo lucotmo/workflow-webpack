@@ -1,5 +1,5 @@
 import css from './scss/main.scss'
-import logoLucotmo from './img/lucotmo-logo.png'
+import logoLucotmo from './images/lucotmo-logo.png'
 
 const page = `
   <main class="Main">
