@@ -4,8 +4,8 @@
   "description": "Flujo de trabajo para trabajar con webpack",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack --config config/webpack.prod.js"
+    "start": "cross-env NODE_ENV=development webpack-dev-server --colors --config config/webpack.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --colors --config config/webpack.prod.js"
   },
   "author": "lucotmo <mail@lucotmo.com>",
   "license": "MIT",

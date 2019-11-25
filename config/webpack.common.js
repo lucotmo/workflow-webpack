@@ -5,7 +5,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   context: paths.src,
-  entry: './index.js',
+  entry: {
+    app: './index.js'
+  } ,
   output: {
     path: paths.build,
     filename: '[name].js',
@@ -51,9 +53,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin([
       {
-        from: paths.publicDir,
-        to: 'assets',
-        ignore: ['*.DS_Store'],
+        from: paths.src + '/fonts',
+        to: 'fonts',
       },
     ]),
     new HtmlWebpackPlugin({
@@ -61,6 +62,12 @@ module.exports = {
       favicon: paths.src + '/img/favicon.ico',
       template: paths.src + '/template.html',
       filename: 'index.html',
+      hash: true,
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true
+      },
+      chunks: ['app']
     }),
   ],
 }
