@@ -17,3 +17,11 @@
 @import './components/carusels';
 @import './components/video';
 @import './components/footer';
+
+.Main{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2em;
+  color: var(--alternate-color);
+}

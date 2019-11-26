@@ -1,18 +1,5 @@
-import css from './scss/main.scss'
-import logoLucotmo from './images/lucotmo-logo.png'
+import './js/app'
 
-const page = `
-  <main class="Main">
-    <h2 class="Main-title">Hola Mundo con Vanilla JS, Webpack, & Sass</h2>
-    <i class="fa fa-smile-o"></i>
-    <div class="Main-logos">
-      <img src=${logoLucotmo}>
-    </div>
-  </main>
-`
+// console.dir(document.querySelector("link[rel='apple-touch-startup-image']"))
 
-document.getElementById('root').innerHTML = page
-
-console.log(
-  'Código del bundle index.js con Vanilla JS'
-)
+// input[name='login']
