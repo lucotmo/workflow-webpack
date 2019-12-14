@@ -1,1 +1,1 @@
-module.exports = __webpack_public_path__ + "images/lucotmo.svg";
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300"><path d="M262 0H38C17 0 0 17 0 38v224c0 21 17 38 38 38h224c21 0 38-17 38-38V38c0-21-17-38-38-38z" fill="#fffc38"/><path d="M161.9 230.7l99.7-80.7-99.7-80.7zM138.3 99V69.3L38.6 150l99.7 80.7V201l-63.1-51 63.1-51z" fill="#242424"/></svg>

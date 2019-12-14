@@ -1,6 +1,9 @@
 const paths = require('./paths'),
   merge = require('webpack-merge'),
   common = require('./webpack.common.js'),
+  imageminMozjpeg = require('imagemin-mozjpeg'),
+  CopyWebpackPlugin = require('copy-webpack-plugin'),
+  ImageminPlugin = require('imagemin-webpack-plugin').default,
   MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = merge(common, {
@@ -13,6 +16,20 @@ module.exports = merge(common, {
     chunkFilename: `[name].js`,
   },
   plugins: [
+    new CopyWebpackPlugin([{
+      from: `${paths.srcDir}/${paths.imagesFolder}`,
+      to: `${paths.publicDir}/${paths.imagesFolder}`,
+      // ignore: ['favicon.ico', 'favicon.png'],
+    }]),
+    new ImageminPlugin({
+      pngquant: ({quality: '65-90'}),
+      plugins: [
+        imageminMozjpeg({
+          quality: 50,
+          progressive: true
+        })
+      ]
+    }),
     new MiniCssExtractPlugin({
       filename: `[name].css`,
       chunkFilename: `[name].css`,
@@ -33,40 +50,6 @@ module.exports = merge(common, {
           'postcss-loader',
           'sass-loader',
         ],
-      },
-      {
-        test: /\.(?:ico|gif|png|jpg|jpeg|webp|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[path][name].[ext]',
-              context: 'src',
-            },
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              mozjpeg: {
-                progressive: true,
-                quality: 65
-              },
-              optipng: {
-                enabled: false,
-              },
-              pngquant: {
-                quality: [0.65, 0.90],
-                speed: 4
-              },
-              gifsicle: {
-                interlaced: false,
-              },
-              webp: {
-                quality: 75
-              }
-            }
-          }
-        ]
       },
     ],
   },
