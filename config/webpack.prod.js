@@ -4,7 +4,9 @@ const paths = require('./paths'),
   imageminMozjpeg = require('imagemin-mozjpeg'),
   CopyWebpackPlugin = require('copy-webpack-plugin'),
   ImageminPlugin = require('imagemin-webpack-plugin').default,
-  MiniCssExtractPlugin = require('mini-css-extract-plugin')
+  MiniCssExtractPlugin = require('mini-css-extract-plugin'),
+  FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries"),
+  OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 
 module.exports = merge(common, {
   mode: 'production',
@@ -34,6 +36,8 @@ module.exports = merge(common, {
       filename: `[name].css`,
       chunkFilename: `[name].css`,
     }),
+    new FixStyleOnlyEntriesPlugin(),
+    new OptimizeCSSAssetsPlugin({})
   ],
   module: {
     rules: [
